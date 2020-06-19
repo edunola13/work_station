@@ -1,0 +1,38 @@
+version: "3.3"
+
+services:
+  worker:
+    image: work_station:latest
+    command: ["worker"]
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - "./build_config/.env"
+
+  beat:
+    image: work_station:latest
+    command: ["beat"]
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - "./build_config/.env"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis
+    command: redis-server
+    volumes:
+      - "redis:/data"
+
+volumes:
+  redis:
+
+# networks:
+#   default:
+#     external:
+#       name: docker_gwbridge

@@ -1,0 +1,17 @@
+*.db
+*.sqlite3
+*.sqlite
+*.pyc
+*~
+.env
+env
+
+# Accept these files in the repository
+!.gitignore
+!.travis.yml
+
+# Translations
+*.mo
+
+# Logs
+*.log
