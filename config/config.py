@@ -34,7 +34,7 @@ CELERY_INCLUDE = [
 CELERY_BEAT_SCHEDULE = {
     'task-status': {
         'task': 'src.modules.tasks.status.performance_status',
-        'schedule': 60 * 1,  # 5 minutes
+        'schedule': 60 * int(os.getenv('REFRESH_TIME', '5')),  # 5 minutes
     },
 }
 
